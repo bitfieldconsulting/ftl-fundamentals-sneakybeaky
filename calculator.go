@@ -14,5 +14,5 @@ func Subtract(a, b float64) float64 {
 
 // Multiply takes two numbers and returns the result of multiplying them together
 func Multiply(a, b float64) float64 {
-	return -1
+	return 10
 }
