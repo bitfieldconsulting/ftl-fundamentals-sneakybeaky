@@ -41,6 +41,8 @@ func TestSubtract(t *testing.T) {
 		{name: "Subtracting two positive numbers giving a positive", a: 4, b: 2, want: 2},
 		{name: "Subtracting two positive numbers giving zero", a: 2, b: 2, want: 0},
 		{name: "Subtracting two positive numbers giving a negative number", a: 2, b: 4, want: -2},
+		{name: "Subtracting two positive fractional numbers giving a positive whole number", a: 5.5, b: 1.5, want: 4},
+		{name: "Subtracting two positive fractional numbers giving a positive fractional number", a: 5.5, b: 2.4, want: 3.1},
 	}
 
 	for _, test := range tcs {
