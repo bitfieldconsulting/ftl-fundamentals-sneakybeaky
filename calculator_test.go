@@ -6,21 +6,18 @@ import (
 	"testing"
 )
 
-type testcase struct {
-	a    float64
-	b    float64
-	want float64
-}
-
 func TestAdd(t *testing.T) {
 	t.Parallel()
 
-	tests := []testcase{
+	tcs := []struct {
+		a, b float64
+		want float64
+	}{
 		{a: 2, b: 2, want: 4},
 		{a: -1, b: 1, want: 0},
 	}
 
-	for i, test := range tests {
+	for i, test := range tcs {
 		t.Run(fmt.Sprintf("test case %d", i), func(t *testing.T) {
 			got := calculator.Add(test.a, test.b)
 			if test.want != got {
