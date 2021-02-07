@@ -32,10 +32,23 @@ func TestAdd(t *testing.T) {
 
 func TestSubtract(t *testing.T) {
 	t.Parallel()
-	var want float64 = 2
-	got := calculator.Subtract(4, 2)
-	if want != got {
-		t.Errorf("want %f, got %f", want, got)
+
+	tcs := []struct {
+		name string
+		a, b float64
+		want float64
+	}{
+		{name: "Subtracting two positive numbers giving a positive", a: 4, b: 2, want: 2},
+	}
+
+	for _, test := range tcs {
+		t.Run(fmt.Sprintf(test.name), func(t *testing.T) {
+			got := calculator.Subtract(test.a, test.b)
+			if test.want != got {
+				t.Errorf("want %f, got %f", test.want, got)
+			}
+
+		})
 	}
 }
 
