@@ -41,9 +41,24 @@ func TestSubtract(t *testing.T) {
 
 func TestMultiply(t *testing.T) {
 	t.Parallel()
-	var want float64 = 10
-	got := calculator.Multiply(2, 5)
-	if want != got {
-		t.Errorf("want %f, got %f", want, got)
+
+	tcs := []struct {
+		name string
+		a, b float64
+		want float64
+	}{
+		{name: "Product of 2 positives is a positive", a: 2, b: 5, want: 10},
+		{name: "Product of a positive and zero is zero", a: 2, b: 0, want: 0},
+		{name: "Product of a negative and zero is zero", a: -10, b: 0, want: 0},
+	}
+
+	for i, test := range tcs {
+		t.Run(fmt.Sprintf("test case %d", i), func(t *testing.T) {
+			got := calculator.Multiply(test.a, test.b)
+			if test.want != got {
+				t.Errorf("want %f, got %f", test.want, got)
+			}
+
+		})
 	}
 }
