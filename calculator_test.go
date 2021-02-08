@@ -19,11 +19,11 @@ func TestAdd(t *testing.T) {
 		{name: "A negative and a negative that sum to a negative", a: -1, b: -4, want: -5},
 	}
 
-	for _, test := range tcs {
-		t.Run(fmt.Sprintf(test.name), func(t *testing.T) {
-			got := calculator.Add(test.a, test.b)
-			if test.want != got {
-				t.Errorf("want %f, got %f", test.want, got)
+	for _, tc := range tcs {
+		t.Run(fmt.Sprintf(tc.name), func(t *testing.T) {
+			got := calculator.Add(tc.a, tc.b)
+			if tc.want != got {
+				t.Errorf("want %f, got %f", tc.want, got)
 			}
 
 		})
@@ -45,11 +45,11 @@ func TestSubtract(t *testing.T) {
 		{name: "Subtracting two positive fractional numbers giving a positive fractional number", a: 5.5, b: 2.4, want: 3.1},
 	}
 
-	for _, test := range tcs {
-		t.Run(fmt.Sprintf(test.name), func(t *testing.T) {
-			got := calculator.Subtract(test.a, test.b)
-			if test.want != got {
-				t.Errorf("want %f, got %f", test.want, got)
+	for _, tc := range tcs {
+		t.Run(fmt.Sprintf(tc.name), func(t *testing.T) {
+			got := calculator.Subtract(tc.a, tc.b)
+			if tc.want != got {
+				t.Errorf("want %f, got %f", tc.want, got)
 			}
 
 		})
@@ -68,11 +68,48 @@ func TestMultiply(t *testing.T) {
 		"Product of a negative and zero is zero": {a: -10, b: 0, want: 0},
 	}
 
-	for name, test := range tcs {
+	for name, tc := range tcs {
 		t.Run(fmt.Sprintf(name), func(t *testing.T) {
-			got := calculator.Multiply(test.a, test.b)
-			if test.want != got {
-				t.Errorf("want %f, got %f", test.want, got)
+			got := calculator.Multiply(tc.a, tc.b)
+			if tc.want != got {
+				t.Errorf("want %f, got %f", tc.want, got)
+			}
+
+		})
+	}
+}
+
+func TestDivide(t *testing.T) {
+	t.Parallel()
+
+	tcs := []struct {
+		name        string
+		a, b        float64
+		errExpected bool
+		want        float64
+	}{
+		{name: "Dividing two positive numbers giving a positive", a: 8, b: 2, want: 4},
+	}
+
+	for _, tc := range tcs {
+		t.Run(fmt.Sprintf(tc.name), func(t *testing.T) {
+			got, err := calculator.Divide(tc.a, tc.b)
+
+			if tc.errExpected {
+				if err == nil {
+					t.Error("expected an error but got none")
+				}
+
+			} else {
+
+				if err != nil {
+					t.Errorf("got an error but wasn't expecting one : %v", err)
+					return
+				}
+
+				if tc.want != got {
+					t.Errorf("want %f, got %f", tc.want, got)
+				}
 			}
 
 		})
