@@ -89,6 +89,7 @@ func TestDivide(t *testing.T) {
 		want        float64
 	}{
 		{name: "Dividing two positive numbers giving a positive", a: 8, b: 2, want: 4},
+		{name: "Dividing by zero giving an error", a: 10, b: 0, errExpected: true},
 	}
 
 	for _, tc := range tcs {
