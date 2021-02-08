@@ -90,6 +90,7 @@ func TestDivide(t *testing.T) {
 	}{
 		{name: "Dividing two positive numbers giving a positive", a: 8, b: 2, want: 4},
 		{name: "Dividing by zero giving an error", a: 10, b: 0, errExpected: true},
+		{name: "Dividing two negative numbers giving a positive", a: -10, b: -2, want: 5},
 	}
 
 	for _, tc := range tcs {
